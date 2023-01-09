@@ -1,0 +1,92 @@
+*{
+    margin: 0px;
+    padding: 0px;
+  }
+  
+input[type = "checkbox"], .hamburger{
+display: none;
+}
+
+nav{
+display: flex;
+justify-content: space-between;
+min-height: 60px;
+align-items: center;
+background: #212523;
+padding-left: 10px;
+padding-right: 10px;
+}
+
+nav .left-side .nav-links{
+display: flex;
+}
+
+nav .left-side .nav-links a{
+display: block;
+padding: 10px;
+padding-top: 17px;;
+color: white;
+text-decoration: underline;
+}
+
+nav .right-side h1{
+color: white;
+padding: 10px;
+}
+
+h3{
+    color:white;
+    padding: 10px;
+}
+
+.d-flex{
+    margin-right: 8px;
+
+}
+@media (max-width: 700px){
+nav .left-side .nav-links{
+    display: none;
+}
+
+nav{
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+nav .right-side{
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    width: 100%;
+    justify-content: space-between;
+}
+
+nav .right-side .hamburger{
+    display: block;
+    padding: 10px;
+}
+
+nav input[type = "checkbox"]{
+    display: block;
+    transform: scale(2);
+    position: absolute;
+    margin-left: 33px;
+    margin-top: -43px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+nav input[type = "checkbox"]:checked ~ .nav-links{
+    display: block;
+}
+
+nav .right-side .hamburger span{
+    display: block;
+    height: 3px;
+    width: 25px;
+    margin: 6.5px;
+    background: white;
+}
+}
