@@ -18,7 +18,6 @@ export default function Area(props) {
     setobj2(data)
     console.log("obj2:",obj2);
     setIsTrue(true)  
-     // LOGS DATA FROM CHILD (My name is Dean Winchester... &)
   }
   // function shuffle(array) {
   //   let currentIndex = array.length,  randomIndex;
