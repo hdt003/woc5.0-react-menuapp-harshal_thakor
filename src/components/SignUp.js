@@ -61,13 +61,16 @@ export default function SignUp() {
       if(auth.currentUser){
       window.location.replace("/");
     }
-    }
+    } 
     function todo(){
        check();
        setTimeout(pass, 3000)
       }
   return (
     <div>
+      <br/>
+      <br/>
+
       <div className="container">
         <div className="text-center"><h2>SignUp</h2></div>
         <div className="my-3">

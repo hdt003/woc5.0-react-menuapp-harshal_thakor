@@ -3,10 +3,12 @@ import "../css/Itempage.css"
 import vegg from "../images/veg.png"
 import nonvegg from "../images/nonveg.png"
 export default function ItemPage(props) {
+  
   function content()
   {
+    console.log("description:",props.description)
     var arr=[];
-    console.log(props.review)
+    // console.log(props.review)
     if(props.review)
     {
       var i=1
@@ -24,13 +26,16 @@ export default function ItemPage(props) {
   }
 return (
   <div>
+    <br/>
+            <br/>
+            
       <div className="row">
       {/* d-flex justify-content-evenly */}
         <div className="col-6 column6">
           <div> 
           <img className="position-fixed p-3"src={props.food_type==="Veg"?vegg:nonvegg}  alt="..." width="6%" height="14%"  />
-          <img src={props.img} className="rounded" alt="..." width="100%" height="100%"/>
-          <div class="topright"></div>
+          <img src={props.img} className="rounded shadoww" alt="..." width="100%" height="100%"/>
+          <div className="topright"></div>
           </div>
         </div>
         <div className="col-6 column6 px-5" id="name"><b><p className='text-center fs-5'><hr />{props.name}<hr /></p>
@@ -42,10 +47,10 @@ return (
             <span className="heading">Rating: </span>   
             {content()}
         </p>    
-        <p className="text-dark fs-3">&#8377; {props.price}</p>
+        <p className={`fs-3 text text-`} style={{color: `${props.mode==="dark"?"white":"black"}`}} >&#8377; {props.price}</p>
         </div>
         <div className="text-center">
-        <button className="btn btn-danger fs-4 "><b>Order Now</b></button></div>
+        <button className="btn btn-danger fs-4 shadoww"><b>Order Now</b></button></div>
         </b>
         </div>
       </div>

@@ -1,9 +1,8 @@
 
-    body {
-        background: rgb(2,0,36);
-background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,29,193,1) 0%, rgba(34,192,198,1) 0%, rgba(73,154,243,1) 49%, rgba(4,41,204,1) 100%);
-    }
 
+    .shadoww{
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+  }
 
   [class*="column"] {
     width: 100%;

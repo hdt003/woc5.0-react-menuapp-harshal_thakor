@@ -38,13 +38,14 @@ export default function Profile(props) {
     <div>
         {/* {loading && <Spinner/>} */}
         <div className="container">
-            
+            <br/>
+            <br/>
+            <h3 className='text-center' style={{color: `${props.mode==="dark"?"white":"black"}`}}>Your Profile</h3>
             {/* <h2>Uid: {props.uid}</h2> */}  
             <div >
-                <br />
-            <h2 className='p-3 bg-info bg-opacity-10 border border-info  rounded-3'>First Name: {fname}</h2>
-            <h2 className='p-3 bg-info bg-opacity-10 border border-info  rounded-3'>Last Name: {lname}</h2>
-            <h2 className='p-3 bg-info bg-opacity-10 border border-info  rounded-3'>Email: {email}</h2>
+            <h4 className='p-3 bg-info bg-opacity-10 border border-info  rounded-3'>First Name: {fname}</h4>
+            <h4 className='p-3 bg-info bg-opacity-10 border border-info  rounded-3'>Last Name: {lname}</h4>
+            <h4 className='p-3 bg-info bg-opacity-10 border border-info  rounded-3'>Email: {email}</h4>
             {/* <h2 className='p-3 bg-info bg-opacity-10 border border-info  rounded-3'>Password: {password}</h2> */}
             {/* <h2 className='p-3 bg-info bg-opacity-10 border border-info  rounded-3'>Gender:</h2>
             <h2 className='p-3 bg-info bg-opacity-10 border border-info  rounded-3'>Age:</h2> */}

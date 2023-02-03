@@ -22,7 +22,7 @@ export default function Item(props) {
   function content()
   {
     var arr=[];
-    console.log(props.review)
+    // console.log(props.review)
     if(props.review)
     {
       var i=1
@@ -55,15 +55,15 @@ export default function Item(props) {
   //   </div>)
   // }
   return (
-    <div>
-      <div className="my-4 d-flex justify-content-center">
-            <div className="card item" style={{width: "100%"}} >
+    <div >
+      <div className={`my-4 d-flex justify-content-center hover-item`} >
+            <div className={`card item `} style={{width: "100%"}} >
                 <span className="position-absolute top-0 translate-middle badge rounded-pill bg-danger z-1 fs-6 p-2" style={{left:"92%" }}>&#8377; {props.price}
                     <span className="visually-hidden">New alerts</span>
                 </span>
                 {/* {<Spinner/>} */}
-                <img src={props.img} className="card-img-top" alt="..."/>
-                <div className="card-body">
+                <img src={props.img} style={{ height: "180px"}} className="card-img-top" alt="..."/>
+                <div className={`card-body text text-${props.mode==="light"?"dark":"white"}`} style={{background:`${props.mode==="light"?"white":"rgb(24,24,24)"}`}} >
                     <h4 className="card-title">{props.name}</h4>
                     <hr />
                     <p className="card-text"> {props.description}</p>
@@ -73,7 +73,7 @@ export default function Item(props) {
                       </p>
                     {/* <p>created by {author?author:"unknown"} on {new Date(newdate).toGMTString()}</p> */}
                     <div className='text-center'>
-                    <button className="btn btn-sm btn-dark " onClick={() =>props.func(p)}>Order Now</button></div>
+                    <button className="btn btn-sm btn-dark shadoww" onClick={() =>props.func(p)}>Order Now</button></div>
                     {/* <a className="btn btn-sm btn-dark d-flex justify-content-center" href="/ItemPage" target="_blank">Order Now</a> */}
                 </div>
             </div>

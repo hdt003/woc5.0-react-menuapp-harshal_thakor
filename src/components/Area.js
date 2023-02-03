@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,forceUpdate } from 'react'
 import Item from './Item'
-import Spinner from './Spinner'
+// import Spinner from './Spinner'
+import Spinner from './loading'
+
 import {db} from '../firebase'
-import { doc, setDoc,deleteDoc,collection,getDocs,query,where,orderBy,collectionGroup } from "firebase/firestore"; 
+import { getDocs,query,where,orderBy,collectionGroup } from "firebase/firestore"; 
 
 import ItemPage from './ItemPage';
+
 export default function Area(props) {
   let [loading,setLoading]=useState(true)
 
@@ -14,101 +17,134 @@ export default function Area(props) {
   let [isTrue,setIsTrue]=useState(false)
   let [obj2,setobj2]=useState({})
 
+  let [p,setP]=useState("temp")//to check old props with new props
+  let [lastmode,setlastmode]=useState("")
+  // let [once,setonce]=useState(0)
   const pull_data=(data) =>{
     setobj2(data)
     console.log("obj2:",obj2);
     setIsTrue(true)  
   }
-  // function shuffle(array) {
-  //   let currentIndex = array.length,  randomIndex;
-  
-  //   // While there remain elements to shuffle.
-  //   while (currentIndex !== 0) {
-  
-  //     // Pick a remaining element.
-  //     randomIndex = Math.floor(Math.random() * currentIndex);
-  //     currentIndex--;
-  
-  //     // And swap it with the current element.
-  //     [array[currentIndex], array[randomIndex]] = [
-  //       array[randomIndex], array[currentIndex]];
-  //   }
-  // }
+  if(props.mode!==lastmode)
+  {
+    fetchData();
+    setlastmode(props.mode)
+  }
+    // if(props.mode!=lastmode)
+    // {
+    //   window.location.replace(`/${props.value}`);
+    //   setlastmode(props.mode)
+    // }
+  async function fetchData() {
+    setArray([]);
+    console.log("fetchdata")
+    let q;
+    if(`${props.field}`==="popularity")
+    {
+      if(`${props.value}`==="htol")
+      {
+        q = query(collectionGroup(db, "items"), orderBy("popularity","desc"));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+        //uncomment
+        // console.log(doc.data())
+        console.log(doc.id, " => ", doc.data().name,doc.data().popularity,doc.data().description);
+        setArray(array => [...array, doc.data()]);
+      });
+        
+      }
+      else if(`${props.value}`==="ltoh")
+      {
+        q = query(collectionGroup(db,"items"), orderBy("popularity"));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+        //uncomment
+        // console.log(doc.data())
+        console.log(doc.id, " => ", doc.data().name,doc.data().popularity,doc.data().description);
+        setArray(array => [...array, doc.data()]);
+      });
+      }
+    }
+    else
+    {
+        q = query(collectionGroup(db,"items"), where(`${props.field}`, "==", `${props.value}`));  
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data().name,doc.data().popularity,doc.data().description);
+        setArray(array => [...array, doc.data()]);
+      }); 
+    }   
 
+}
+
+if(props.value!=p )
+{
+  fetchData();
+  setP(props.value);
+  setIsTrue(false)
+}
+// if(props.pagename=="home" && once==0)
+// {
+//   window.location.replace("/");
+//   setonce(1)
+// }
+// if(props.value==="" )
+// {
+//   
+// }
+// if(isTrue==true)
+// {
+//   fetchData();
+//   setIsTrue(false)
+//   setP(props.value);
+// }
   useEffect(()=>{
-
-    // loadData();
     //query
     if (!ranonce) {
-      async function fetchData() {
-        let q;
-        if(`${props.field}`==="popularity")
-        {
-          if(`${props.value}`==="htol")
-          {
-             q = query(collectionGroup(db, "items"), orderBy("popularity","desc"));
-            
-          }
-          else if(`${props.value}`==="ltoh")
-          {
-             q = query(collectionGroup(db,"items"), orderBy("popularity"));
-          }
-        }
-        else
-        {
-             q = query(collectionGroup(db,"items"), where(`${props.field}`, "==", `${props.value}`));   
-        }   
-          const querySnapshot = await getDocs(q);
-            querySnapshot.forEach((doc) => {
-            console.log(doc.data())
-            console.log(doc.id, " => ", doc.data().name,doc.data().popularity,doc.data().description);
-            setArray(array => [...array, doc.data()]);
-            // setArray(array => shuffle(array));
-          });
-          // console.log(array)
-    }
-    fetchData();
-    console.log(props.field)
-    console.log(props.value)
-    console.log("UseEffect")
-    ranonce = true
-    setLoading(false)
+      setLoading(true)
+      fetchData();
+      console.log(props.field)
+      console.log(props.value)
+      console.log("UseEffect")
+      ranonce = true
+      setLoading(false)
   }
   },[])
 
+
+  // async function insertData(){
+  //   let obj=
+  //   {
+  //     img:"https://b.zmtcdn.com/data/dish_photos/086/2b86c1e8fb771f76309c4c10926be086.jpg?fit=around|130:130&crop=130:130;",
+  //     video:"",
+  //     name:"Ala Mexican Pizza",
+  //     food_type: "Veg",
+  //     type: "Dinner",
+  //     description: "La Pino'z Pizza",
+  //     price: 190,
+  //     popularity: 222,
+  //     address:"Airport Gandhinagar Highway, Gandhinagar",
+  //     review:5 //1 to 5
+  // }
+  //   await setDoc(doc(db, "restaurant","La Pino'z Pizza","items","Ala Mexican Pizza"), obj);
+  //   console.log(obj);
+  //   console.log("data inserted in db");
   
-  async function insertData(){
-    let obj=
-    {
-              img:"https://b.zmtcdn.com/data/dish_photos/086/2b86c1e8fb771f76309c4c10926be086.jpg?fit=around|130:130&crop=130:130;",
-      video:"",
-      name:"Ala Mexican Pizza",
-      food_type: "Veg",
-      type: "Dinner",
-      description: "La Pino'z Pizza",
-      price: 190,
-      popularity: 222,
-      address:"Airport Gandhinagar Highway, Gandhinagar",
-      review:5 //1 to 5
-  }
-    await setDoc(doc(db, "restaurant","La Pino'z Pizza","items","Ala Mexican Pizza"), obj);
-    console.log(obj);
-    console.log("data inserted in db");
+  //   // console.log(array[0].name)
+  //   // array.map((element,index)=>{
+  //   //   console.log(element.name,"attttt",index)
+  //   // })
+  // }
   
-    // console.log(array[0].name)
-    // array.map((element,index)=>{
-    //   console.log(element.name,"attttt",index)
-    // })
-  }
-  
-  async function deleteData(){
-    await deleteDoc(doc(db, "menu", "eUsn0OV4H00R3Bl6JErv"));
-    console.log("data deleted in db");
-  }
+  // async function deleteData(){
+  //   await deleteDoc(doc(db, "menu", "eUsn0OV4H00R3Bl6JErv"));
+  //   console.log("data deleted in db");
+  // }
 
   function titleText(){
     if(props.value==="htol")
     {
+      // forceUpdate();
       return "by Popularity High to Low"
     }
     else if(props.value==="ltoh")
@@ -123,22 +159,22 @@ export default function Area(props) {
       return "in "+props.value
     }
   }
-  
+  // `${props.mode==="dark"?:"white"}`
   return (
-    <div>
-
+    <div >
+      <br />
       <div className="container my-4" >
-
           {loading && <Spinner/>}
+          <div className='mt-5' id="liveAlertPlaceholder"></div>
             {!isTrue ?<div>
-            <h1><u>Top Food Items  {titleText()}</u></h1>
+            <h1 className="text-center" style={{color: `${props.mode==="light"?"black":"white"}`}}>Top Food Items  {titleText()}</h1>
             <div className="container">
                    {/* {array.forEach( (item, index)=>{return <div>sdfghj</div>})} */}
             <div className="row">
                     {
+                      
                       array.map((element,index)=>{
-                        
-                        return  <div className="col-sm-12 col-md-6 col-lg-4" key={index}>
+                        return  <div className="col-sm-12 col-md-6 col-lg-4 itemmm" key={index} >
                           <Item 
                           img={element.img} 
                           description={element.description}
@@ -150,7 +186,8 @@ export default function Area(props) {
                           video={element.video} 
                           name={element.name}
                           func={pull_data}
-                          address={element.address}/>
+                          address={element.address}
+                          mode={props.mode}/>
                       </div>
                       })
                     }
@@ -168,6 +205,7 @@ export default function Area(props) {
             <br/>*/}
 
             </div>
+            
             </div>:<ItemPage img={obj2.img} 
                           description={obj2.description}
                           food_type={obj2.food_type}
@@ -177,7 +215,9 @@ export default function Area(props) {
                           review={obj2.review}
                           video={obj2.video} 
                           name={obj2.name}
-                          address={obj2.address}/>}
+                          address={obj2.address}
+                          mode={props.mode}
+                           />}
         </div>
     </div>
   )
