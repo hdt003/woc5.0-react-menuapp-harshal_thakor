@@ -81,12 +81,10 @@ function App() {
   }
 
   //to clear alert box every 6 seconds
-  function clearBox(elementID)
-  {
-      document.getElementById(elementID).innerHTML = "";
-  }
+  
   setTimeout(() => {
-    clearBox('liveAlertPlaceholder')
+    // clearBox()
+    document.getElementById('liveAlertPlaceholder').innerHTML = "";
   }, 8000);
 
   return (
@@ -114,7 +112,7 @@ function App() {
             <Route exact path="/login" element={<Login mode={mode}/>}/>
             <Route exact path="/SignUp" element={<SignUp mode={mode}/>}/>
             <Route exact path="/Profile" element={<Profile uid={Userid } mode={mode}/>}/>
-            <Route exact path="/contact" element={<ContactUs mode={mode}/>}/>
+            <Route exact path="/contact" element={<ContactUs uid={Userid } mode={mode}/>}/>
         </Routes>
       </Router>
       </div>

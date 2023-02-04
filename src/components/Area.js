@@ -9,6 +9,7 @@ import { getDocs,query,where,orderBy,collectionGroup } from "firebase/firestore"
 import ItemPage from './ItemPage';
 
 export default function Area(props) {
+  console.clear();
   let [loading,setLoading]=useState(true)
 
   let [array,setArray]=useState([])

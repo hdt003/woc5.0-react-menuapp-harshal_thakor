@@ -5,6 +5,7 @@ import { doc } from "firebase/firestore";
 import Spinner from './Spinner';
 
 export default function Profile(props) {
+    console.clear();
     let [fname,setFName]=useState("")
     let [lname,setLName]=useState("")
     let [password,setPassword]=useState("")

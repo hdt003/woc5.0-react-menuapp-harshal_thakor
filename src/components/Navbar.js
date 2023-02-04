@@ -3,7 +3,7 @@ import "../css/Navbar.css";
 import {auth} from "../firebase"
 import { signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
-import "../css/mode.css"
+
 function logout(){
   signOut(auth).then(() => {
     // Sign-out successful.
@@ -28,7 +28,7 @@ export default function NavBar(props) {
         <input type="checkbox"/>
         <div className="nav-links" style={{background:`${props.mode==="light"?"white":""}`,color: `${props.mode==="light"?"black":"white"}`, "textDecoration": "none"}}>
           
-          <h3><img src="https://www.linkpicture.com/q/7896.png" height="38px" width="35px"/></h3>
+          <h3><img src="https://www.linkpicture.com/q/7896.png" alt="..." height="38px" width="35px"/></h3>
           <h3 style={{color: `${props.mode==="light"?"black":"white"}`, "textDecoration": "none"}}>Menu App</h3>
           <div className="nav-link-wrapper hover-underline-animation"><Link style={{color: `${props.mode==="light"?"black":"white"}`, "textDecoration": "none"}} to="/">Home</Link></div>
           <div className="nav-item dropdown hover-underline-animation">

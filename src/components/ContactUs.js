@@ -1,84 +1,72 @@
-import React, { Component } from 'react'
+import { doc, setDoc } from 'firebase/firestore';
+import React, { Component, useEffect, useId, useState } from 'react'
+import { auth } from '../firebase';
+import {db} from '../firebase'
+import "../css/placeholder1.css"
+export default function ContactUs(props) {
+    let [subject,setSubject]=useState("")
+    let [message,setMessage]=useState("")
+    let [userId,setUserId]=useState("")
 
-export default class ContactUs extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          name: '',
-          email: '',
-          subject:'',
-          message: ''
+    let obj = {
+        sub:subject,
+        msg:message
+    }
+    useEffect(()=>{
+            setUserId(props.uid)
+        },[])
+
+    const insertData=(async()=>{
+        await setDoc(doc(db, "contactus",userId), obj);
+        console.log(obj);
+        console.log("data inserted in db");
+        })
+    const check=()=>{
+    
+        if(subject==="" && message==="")
+        {
+            document.getElementById("new").innerHTML="Enter Subject and Description"
+        }
+        else if(subject==="")
+        {
+            document.getElementById("new").innerHTML="Enter Subject"
+        }
+        else if(message==="")
+        {
+            document.getElementById("new").innerHTML="Enter Description"
+        }
+        else{
+            insertData();
         }
     }
-    onNameChange(event) {
-        this.setState({name: event.target.value})
+    
+
+    function todo()
+    {
+        check();
     }
-
-onEmailChange(event) {
-        this.setState({email: event.target.value})
-    }
-
-onSubjectChange(event) {
-        this.setState({subject: event.target.value})
-    }
-
-onMsgChange(event) {
-        this.setState({message: event.target.value})
-    }
-    submitEmail(e){
-        // e.preventDefault();
-        // axios({
-        //   method: "POST", 
-        //   url:"/send", 
-        //   data:  this.state
-        // }).then((response)=>{
-        //   if (response.data.status === 'success'){
-        //       alert("Message Sent."); 
-        //       this.resetForm()
-        //   }else if(response.data.status === 'fail'){
-        //       alert("Message failed to send.")
-        //   }
-        // })
-}
-
-resetForm(){
-        this.setState({name: '', email: '',subject:'', message: ''})
-}
-
-    render() {
-        return (
-            <div className='container'>          
+  return (
+    <div className='container'>          
             <br /><br />
             <form className="row g-3 ">
-            <div className="col-md-6">
-                <label for="inputEmail4" className="form-label">Email</label>
-                <input type="email" className="form-control" id="inputEmail4"/>
-            </div>
-            <div className="col-md-6">
-                <label for="inputPassword4" className="form-label">Name</label>
-                <input type="password" className="form-control" id="inputPassword4"/>
-            </div>
+                <h3 className='text-center' style={{color:`${props.mode==="light"?"black":"white"}`}}>Contact Us</h3>
             <div className="col-12">
-                <label for="inputAddress" className="form-label">Subject</label>
-                <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St"/>
+                <label htmlFor="inputAddress" className="form-label">Subject</label>
+                <input type="text" className={`form-control ${props.mode==="light"?"light1":"dark1"}`} style={{background:`${props.mode==="light"?"white":"rgb(24,24,24)"}`,color:`${props.mode==="light"?"black":"white"}`}} id="inputAddress" placeholder="Enter the Subject" onChange={(event)=>setSubject(event.target.value)}/>
             </div>
-            <div className="col-12">
-                <label for="inputAddress2" className="form-label">Description</label>
-                <input type="text" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"/>
+            <div className="col-12 " >
+                <label htmlFor="inputAddress2" className="form-label">Description</label>
+                <textarea className={`form-control ${props.mode==="light"?"light1":"dark1"}`} style={{background:`${props.mode==="light"?"white":"rgb(24,24,24)"}`,color:`${props.mode==="light"?"black":"white"}`}} id="textAreaExample1" placeholder="Enter the Description" rows="7" onChange={(event)=>setMessage(event.target.value)}></textarea>
             </div>
-   
-            <div className="col-12">
-                <button type="submit" className="btn btn-primary">Submit</button>
+            <div className="text text-center text-danger fw-bold" id="new"></div>
+            <div className="col-12 d-flex justify-content-center">
+            <div className='btn btn-primary' onClick={todo}>Submit</div>
             </div>
             </form>
             </div>
 
-        );
-    }
-    
+  )
 }
-{/* Name
-email
-subject 
-submit */}
 
+
+// 
