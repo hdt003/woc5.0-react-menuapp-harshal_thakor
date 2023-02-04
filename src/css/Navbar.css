@@ -132,11 +132,11 @@ h3{
 }
 
 .dropdown-menu{
-    background-color: #212523;
+    background-color: rgb(0,0,0);
 }
 
 .dropdown-item:hover{
-    background-color: rgb(96, 97, 96);
+    background-color: rgb(67, 67, 67);
 }
 
 .dropdown-divider{

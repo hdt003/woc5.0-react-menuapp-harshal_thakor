@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../css/Navbar.css";
 import {auth} from "../firebase"
 import { signOut } from "firebase/auth";
@@ -19,7 +19,9 @@ function logOutAndGoToSignUp()
   window.location.replace("/SignUp");
 }
 export default function NavBar(props) {
-  
+  // useState(()=>{
+  //   props.togglemode()
+  // },[])
   return (
     <>
      {/* style={{backgroundColor: `${props.mode}==="light"?"white":"black" !important` ,color:`${props.mode}==="light"?"black":"white"` }} */}
@@ -76,7 +78,7 @@ export default function NavBar(props) {
           </ul>
         </div>
         <div className="nav-link-wrapper hover-underline-animation"><Link style={{color: `${props.mode==="light"?"black":"white"}`, "textDecoration": "none"}} to="/contact">Contact</Link></div>
-        <div className="nav-link-wrapper hover-underline-animation"><Link style={{color: `${props.mode==="light"?"black":"white"}`, "textDecoration": "none"}} to="/">About</Link></div>
+        {/* <div className="nav-link-wrapper hover-underline-animation"><Link style={{color: `${props.mode==="light"?"black":"white"}`, "textDecoration": "none"}} to="/">About</Link></div> */}
         <div className="nav-link-wrapper hover-underline-animation px-3 pt-3">
           <div className="d-flex justify-content-around">
         <p  style={{color: `${props.mode==="light"?"black":"white"}`}}>switch Modes </p>

@@ -12,7 +12,7 @@ export default function Login(props) {
         // Signed in 
         const user = userCredential.user;
         console.log(user.uid)
-        alert("Successfully Logged In")
+        // alert("Successfully Logged In")
         window.location.replace("/");
       })
       .catch((error) => {

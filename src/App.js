@@ -34,30 +34,31 @@ function App() {
   
       //to change mode
       const togglemode=()=>{
+        
         if(mode==="dark")
         {
-            setMode("light")
+          setMode("light")
             // document.body.style.backgroundColor="rgb(45,82,71)";
             document.body.style.backgroundImage="none"
             document.body.style.backgroundColor="rgb(71, 194, 255)";
             // document.body.style.backgroundImage=URL(`${bg}`)
             document.body.style.color="black"
             setAlert("dark mode Enabled")
-            console.log("light")
+            // console.log("light")
             document.title="Menu App - Light mode"
         }
          if(mode==="light")
         {
-            setMode("dark")
-            document.body.style.backgroundColor="rgb(57, 58, 59)";
-            // document.body.style.backgroundImage = `url(${bg})`;
-            // document.body.style.backgroundSize="cover"
-            // document.body.style.backgroundRepeat="no-repeat"
-            // document.body.style.height="1000px"
-            document.body.style.color="white"
-            setAlert("Light mode Enabled")
-            console.log("dark")
-            document.title="Menu App - Dark mode"
+          setMode("dark")
+          document.body.style.backgroundColor="rgb(57, 58, 59)";
+          // document.body.style.backgroundImage = `url(${bg})`;
+          // document.body.style.backgroundSize="cover"
+          // document.body.style.backgroundRepeat="no-repeat"
+          // document.body.style.height="1000px"
+          document.body.style.color="white"
+          setAlert("Light mode Enabled")
+          // console.log("dark")
+          document.title="Menu App - Dark mode"
         }
     }
 
@@ -72,7 +73,7 @@ function App() {
 
   function timeBasedFood(date) {
     var hours = date.getHours();
-    if((hours>=4 && hours<11) || (hours>=16 && hours<17))
+    if((hours>=4 && hours<11) || (hours>=16 && hours<=17))
     return "Breakfast";
     else if(hours>=11 && hours<16)
     return "Lunch";

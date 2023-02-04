@@ -20,7 +20,7 @@ export default function Profile(props) {
             const docSnap =  await getDoc(docRef);
             if (docSnap.exists()) {
                 let data=docSnap.data();
-                console.log("Userdata:",data);
+                // console.log("Userdata:",data);
                 setEmail(data.email);
                 setFName(data.fname);
                 setLName(data.lname);
@@ -44,9 +44,9 @@ export default function Profile(props) {
             <h3 className='text-center' style={{color: `${props.mode==="dark"?"white":"black"}`}}>Your Profile</h3>
             {/* <h2>Uid: {props.uid}</h2> */}  
             <div >
-            <h4 className='p-3 bg-info bg-opacity-10 border border-info  rounded-3'>First Name: {fname}</h4>
-            <h4 className='p-3 bg-info bg-opacity-10 border border-info  rounded-3'>Last Name: {lname}</h4>
-            <h4 className='p-3 bg-info bg-opacity-10 border border-info  rounded-3'>Email: {email}</h4>
+            <h4 className={`p-3 bg-${props.mode==="light"?"white bg-gradient":"dark bg-gradient"}  bg-opacity-25 border border-light  rounded-3`}>First Name: {fname}</h4>
+            <h4 className={`p-3 bg-${props.mode==="light"?"white bg-gradient":"dark bg-gradient"}  bg-opacity-25 border border-light  rounded-3`}>Last Name: {lname}</h4>
+            <h4 className={`p-3 bg-${props.mode==="light"?"white bg-gradient":"dark bg-gradient"}  bg-opacity-25 border border-light  rounded-3`}>Email: {email}</h4>
             {/* <h2 className='p-3 bg-info bg-opacity-10 border border-info  rounded-3'>Password: {password}</h2> */}
             {/* <h2 className='p-3 bg-info bg-opacity-10 border border-info  rounded-3'>Gender:</h2>
             <h2 className='p-3 bg-info bg-opacity-10 border border-info  rounded-3'>Age:</h2> */}

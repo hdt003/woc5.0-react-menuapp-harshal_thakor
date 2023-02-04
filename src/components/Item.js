@@ -73,7 +73,7 @@ export default function Item(props) {
                       </p>
                     {/* <p>created by {author?author:"unknown"} on {new Date(newdate).toGMTString()}</p> */}
                     <div className='text-center'>
-                    <button className="btn btn-sm btn-dark shadoww" onClick={() =>props.func(p)}>Order Now</button></div>
+                    <button className="btn btn-sm btn-dark shadoww" onClick={() =>props.func(p)}>Read More</button></div>
                     {/* <a className="btn btn-sm btn-dark d-flex justify-content-center" href="/ItemPage" target="_blank">Order Now</a> */}
                 </div>
             </div>

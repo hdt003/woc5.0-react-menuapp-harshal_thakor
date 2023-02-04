@@ -20,6 +20,7 @@ export default function ContactUs(props) {
         await setDoc(doc(db, "contactus",userId), obj);
         console.log(obj);
         console.log("data inserted in db");
+        document.getElementById("new").innerHTML="Submitted"
         })
     const check=()=>{
     

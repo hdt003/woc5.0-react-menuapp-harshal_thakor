@@ -4,12 +4,12 @@ import Item from './Item'
 import Spinner from './loading'
 
 import {db} from '../firebase'
-import { getDocs,query,where,orderBy,collectionGroup } from "firebase/firestore"; 
+import { getDocs,query,where,orderBy,collectionGroup, doc, setDoc } from "firebase/firestore"; 
 
 import ItemPage from './ItemPage';
 
 export default function Area(props) {
-  console.clear();
+  // console.clear();
   let [loading,setLoading]=useState(true)
 
   let [array,setArray]=useState([])
@@ -18,19 +18,46 @@ export default function Area(props) {
   let [isTrue,setIsTrue]=useState(false)
   let [obj2,setobj2]=useState({})
 
-  let [p,setP]=useState("temp")//to check old props with new props
-  let [lastmode,setlastmode]=useState("")
+  let [p,setP]=useState("k")//to check old props with new props
+  let [lastmode,setlastmode]=useState("light")
   // let [once,setonce]=useState(0)
   const pull_data=(data) =>{
     setobj2(data)
     console.log("obj2:",obj2);
     setIsTrue(true)  
   }
-  if(props.mode!==lastmode)
-  {
-    fetchData();
-    setlastmode(props.mode)
+  function timeBasedFood(date) {
+    var hours = date.getHours();
+    if((hours>=4 && hours<11) || (hours>=16 && hours<=17))
+    return "Breakfast";
+    else if(hours>=11 && hours<16)
+    return "Lunch";
+    else if((hours>=18 && hours<=23) || (hours>=0 && hours<=3) )
+    return "Dinner";
   }
+  function temp(){
+    if(props.mode!==lastmode )
+    {
+      console.log("lastmode: ",lastmode);
+      console.log("current mode: ",props.mode)
+      fetchData();
+      setlastmode(props.mode)
+    }
+    if(p==="k")
+    {
+      setP(timeBasedFood(new Date))
+      setP(props.value)
+    }
+    else if(props.value!==p )
+    {
+      console.log("p: ",p);
+      console.log("props.value: ",props.value)
+      fetchData();
+      setP(props.value);
+      setIsTrue(false)
+    }
+}
+setTimeout(temp, 0); 
     // if(props.mode!=lastmode)
     // {
     //   window.location.replace(`/${props.value}`);
@@ -78,12 +105,7 @@ export default function Area(props) {
 
 }
 
-if(props.value!=p )
-{
-  fetchData();
-  setP(props.value);
-  setIsTrue(false)
-}
+
 // if(props.pagename=="home" && once==0)
 // {
 //   window.location.replace("/");
@@ -102,32 +124,37 @@ if(props.value!=p )
   useEffect(()=>{
     //query
     if (!ranonce) {
+      console.log("UseEffect")
       setLoading(true)
       fetchData();
       console.log(props.field)
       console.log(props.value)
-      console.log("UseEffect")
       ranonce = true
       setLoading(false)
   }
+  console.log(" ")
+  console.log(" ")
+
+  console.log(" ")
+
   },[])
 
 
   // async function insertData(){
   //   let obj=
   //   {
-  //     img:"https://b.zmtcdn.com/data/dish_photos/086/2b86c1e8fb771f76309c4c10926be086.jpg?fit=around|130:130&crop=130:130;",
+  //     img:"https://b.zmtcdn.com/data/dish_photos/0e2/3eadae994f22d5b4b23e60de85a770e2.jpg",
   //     video:"",
-  //     name:"Ala Mexican Pizza",
+  //     name:"Manchurian",
   //     food_type: "Veg",
-  //     type: "Dinner",
-  //     description: "La Pino'z Pizza",
-  //     price: 190,
-  //     popularity: 222,
-  //     address:"Airport Gandhinagar Highway, Gandhinagar",
+  //     type: "Breakfast",
+  //     description: "Greenz Restaurant",
+  //     price: 130,
+  //     popularity: 140,
+  //     address:"Sector 10, Gandhinagar",
   //     review:5 //1 to 5
   // }
-  //   await setDoc(doc(db, "restaurant","La Pino'z Pizza","items","Ala Mexican Pizza"), obj);
+  //   await setDoc(doc(db, "restaurant","Greenz Restaurant","items","Manchurian"), obj);
   //   console.log(obj);
   //   console.log("data inserted in db");
   
@@ -164,7 +191,7 @@ if(props.value!=p )
   return (
     <div >
       <br />
-      <div className="container my-4" >
+      <div className="container my-4" id="area">
           {loading && <Spinner/>}
           <div className='mt-5' id="liveAlertPlaceholder"></div>
             {!isTrue ?<div>
@@ -196,7 +223,7 @@ if(props.value!=p )
                    {/* <div className="col-6"><Item/></div> */}
             </div>
              {/* <button className="btn btn-primary" onClick={insertData}>insert data in db</button> */}
-            <br/>
+            
             {/* <button className="btn btn-primary" onClick={func}>isTrue</button>
             <br/> */}
             {/*
