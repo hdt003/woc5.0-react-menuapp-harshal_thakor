@@ -3,7 +3,7 @@
     padding: 0px;
   }
   
-input[type = "checkbox"], .hamburger{
+input[type = "checkbox"], .menuu{
 display: none;
 }
 
@@ -180,9 +180,9 @@ nav .right-side{
     justify-content: space-between;
 }
 
-nav .right-side .hamburger{
+nav .right-side .menuu{
     display: block;
-    padding: 10px;
+    padding: 13px;
 }
 
 nav input[type = "checkbox"]{
@@ -199,11 +199,26 @@ nav input[type = "checkbox"]:checked ~ .nav-links{
     display: block;
 }
 
-nav .right-side .hamburger span{
+/* nav .right-side .menuu .light2 span{
     display: block;
     height: 3px;
     width: 28px;
     margin: 6.5px;
-    background: white;
+    background: rgb(0, 0, 0) !important;
+} */
+
+nav .right-side .light2 span{
+  display: block;
+  height: 3px;
+  width: 28px;
+  margin: 6.5px;
+  background: rgb(0, 0, 0) !important;
+}
+nav .right-side .dark2 span{
+  display: block;
+  height: 3px;
+  width: 28px;
+  margin: 6.5px;
+  background: rgb(255, 255, 255) !important;
 }
 }

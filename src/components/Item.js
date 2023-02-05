@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-// import Spinner from './Spinner'
+import React, { useEffect } from 'react'
 import "../css/item.css"
 export const UserContext = React.createContext();
 
@@ -22,7 +21,6 @@ export default function Item(props) {
   function content()
   {
     var arr=[];
-    // console.log(props.review)
     if(props.review)
     {
       var i=1
@@ -38,22 +36,6 @@ export default function Item(props) {
     }
     return null
   }
-  // function temp()
-  // {
-  //   return (  <div>
-  //     <UserContext.Provider img={props.img} 
-  //     description={props.description}
-  //     food_type={props.food_type}
-  //     price={props.price}
-  //     popularity= {props.popularity}
-  //     type={props.type}
-  //     review={props.review}
-  //     video={props.video} 
-  //     name={props.name}>
-  //       <ItemPage />
-  //     </UserContext.Provider>
-  //   </div>)
-  // }
   return (
     <div >
       <div className={`my-4 d-flex justify-content-center hover-item`} >
@@ -61,9 +43,8 @@ export default function Item(props) {
                 <span className="position-absolute top-0 translate-middle badge rounded-pill bg-danger z-1 fs-6 p-2" style={{left:"92%" }}>&#8377; {props.price}
                     <span className="visually-hidden">New alerts</span>
                 </span>
-                {/* {<Spinner/>} */}
                 <img src={props.img} style={{ height: "180px"}} className="card-img-top" alt="..."/>
-                <div className={`card-body text text-${props.mode==="light"?"dark":"white"}`} style={{background:`${props.mode==="light"?"white":"rgb(24,24,24)"}`}} >
+                <div className={`card-body text text-${props.mode==="light"?"dark":"white"}`} style={{background:`${props.mode==="light"?"white":"black"}`}} >
                     <h4 className="card-title">{props.name}</h4>
                     <hr />
                     <p className="card-text"> {props.description}</p>
@@ -71,10 +52,8 @@ export default function Item(props) {
                       <span className="heading">Rating: </span>   
                       {content()}
                       </p>
-                    {/* <p>created by {author?author:"unknown"} on {new Date(newdate).toGMTString()}</p> */}
                     <div className='text-center'>
                     <button className="btn btn-sm btn-dark shadoww" onClick={() =>props.func(p)}>Read More</button></div>
-                    {/* <a className="btn btn-sm btn-dark d-flex justify-content-center" href="/ItemPage" target="_blank">Order Now</a> */}
                 </div>
             </div>
     </div>

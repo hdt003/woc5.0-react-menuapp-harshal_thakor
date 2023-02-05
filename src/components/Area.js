@@ -1,16 +1,13 @@
-import React, { useEffect, useState,forceUpdate } from 'react'
+import React, { useEffect, useState } from 'react'
 import Item from './Item'
-// import Spinner from './Spinner'
-import Spinner from './loading'
-
 import {db} from '../firebase'
-import { getDocs,query,where,orderBy,collectionGroup, doc, setDoc } from "firebase/firestore"; 
+import { getDocs,query,where,orderBy,collectionGroup } from "firebase/firestore"; 
+// import { doc, setDoc} from "firebase/firestore"; 
 
 import ItemPage from './ItemPage';
 
 export default function Area(props) {
-  // console.clear();
-  let [loading,setLoading]=useState(true)
+  console.clear();
 
   let [array,setArray]=useState([])
   var ranonce = false;
@@ -38,8 +35,8 @@ export default function Area(props) {
   function temp(){
     if(props.mode!==lastmode )
     {
-      console.log("lastmode: ",lastmode);
-      console.log("current mode: ",props.mode)
+      // console.log("lastmode: ",lastmode);
+      // console.log("current mode: ",props.mode)
       fetchData();
       setlastmode(props.mode)
     }
@@ -50,8 +47,8 @@ export default function Area(props) {
     }
     else if(props.value!==p )
     {
-      console.log("p: ",p);
-      console.log("props.value: ",props.value)
+      // console.log("p: ",p);
+      // console.log("props.value: ",props.value)
       fetchData();
       setP(props.value);
       setIsTrue(false)
@@ -74,8 +71,6 @@ setTimeout(temp, 0);
         q = query(collectionGroup(db, "items"), orderBy("popularity","desc"));
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
-        //uncomment
-        // console.log(doc.data())
         console.log(doc.id, " => ", doc.data().name,doc.data().popularity,doc.data().description);
         setArray(array => [...array, doc.data()]);
       });
@@ -86,8 +81,6 @@ setTimeout(temp, 0);
         q = query(collectionGroup(db,"items"), orderBy("popularity"));
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
-        //uncomment
-        // console.log(doc.data())
         console.log(doc.id, " => ", doc.data().name,doc.data().popularity,doc.data().description);
         setArray(array => [...array, doc.data()]);
       });
@@ -105,32 +98,13 @@ setTimeout(temp, 0);
 
 }
 
-
-// if(props.pagename=="home" && once==0)
-// {
-//   window.location.replace("/");
-//   setonce(1)
-// }
-// if(props.value==="" )
-// {
-//   
-// }
-// if(isTrue==true)
-// {
-//   fetchData();
-//   setIsTrue(false)
-//   setP(props.value);
-// }
   useEffect(()=>{
-    //query
     if (!ranonce) {
       console.log("UseEffect")
-      setLoading(true)
       fetchData();
       console.log(props.field)
       console.log(props.value)
       ranonce = true
-      setLoading(false)
   }
   console.log(" ")
   console.log(" ")
@@ -187,32 +161,28 @@ setTimeout(temp, 0);
       return "in "+props.value
     }
   }
-  // `${props.mode==="dark"?:"white"}`
   return (
     <div >
-      <br />
       <div className="container my-4" id="area">
-          {loading && <Spinner/>}
-          <div className='mt-5' id="liveAlertPlaceholder"></div>
+        <br />
             {!isTrue ?<div>
             <h1 className="text-center" style={{color: `${props.mode==="light"?"black":"white"}`}}>Top Food Items  {titleText()}</h1>
             <div className="container">
-                   {/* {array.forEach( (item, index)=>{return <div>sdfghj</div>})} */}
             <div className="row">
                     {
                       
                       array.map((element,index)=>{
                         return  <div className="col-sm-12 col-md-6 col-lg-4 itemmm" key={index} >
                           <Item 
-                          img={element.img} 
-                          description={element.description}
-                          food_type={element.food_type}
-                          price={element.price}
-                          popularity= {element.popularity}
-                          type={element.type}
+                          img={element.img?element.img:"image"} 
+                          description={element.description?element.description:"description"}
+                          food_type={element.food_type?element.food_type:"Lunch"}
+                          price={element.price?element.price:"100"}
+                          popularity= {element.popularity?element.popularity:"0"}
+                          type={element.type?element.type:"not found"}
+                          video={element.video?element.video:"video not found"} 
+                          name={element.name?element.name:"name"}
                           review={element.review}
-                          video={element.video} 
-                          name={element.name}
                           func={pull_data}
                           address={element.address}
                           mode={props.mode}/>
@@ -220,7 +190,6 @@ setTimeout(temp, 0);
                       })
                     }
                      
-                   {/* <div className="col-6"><Item/></div> */}
             </div>
              {/* <button className="btn btn-primary" onClick={insertData}>insert data in db</button> */}
             
@@ -260,7 +229,8 @@ setTimeout(temp, 0);
 // popularity= {element.popularity?element.popularity:"0"}
 // type={element.type?element.type:"Veg"}
 // video={element.video?element.video:"video not found"} 
-// name={element.name?element.name:"name"}/>
+// name={element.name?element.name:"name"}
+// />
 
 // {this.state.articles.map((element,index)=>{
 //   return <div className=" col-sm-12 col-md-6 col-lg-4" key={element.url}>

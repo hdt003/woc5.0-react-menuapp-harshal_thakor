@@ -8,19 +8,11 @@ import { auth } from './firebase';
 import { useEffect,useState } from 'react';
 import ItemPage from './components/ItemPage';
 import ContactUs from './components/ContactUs';
-
-// import bg from './images/backgroundd.jpg'
-// import ItemPage from './components/ItemPage';
 function App() {
   const [Userid,setUserid]=useState("")
   const [mode,setMode]=useState("light");
   const [aalert,setAlert]=useState("Light Mode Enabled")
-  const [runonce,setrunonce]=useState(0)
 
-  // if( runonce==0 && !auth.currentUser){
-  //   window.location.replace("/login");
-  //   setrunonce(1)
-  //   }
   useEffect(()=>{ 
 
     auth.onAuthStateChanged((user)=>{
@@ -31,7 +23,7 @@ function App() {
     });
     togglemode();
   },[])
-  
+
       //to change mode
       const togglemode=()=>{
         
@@ -40,8 +32,7 @@ function App() {
           setMode("light")
             // document.body.style.backgroundColor="rgb(45,82,71)";
             document.body.style.backgroundImage="none"
-            document.body.style.backgroundColor="rgb(71, 194, 255)";
-            // document.body.style.backgroundImage=URL(`${bg}`)
+            document.body.style.backgroundImage="linear-gradient(90deg, #fcee21 0%, #ff4800 100%)";//blue //rgb(71, 194, 255)"//linear-gradient(90deg, #ff4800 0%, #dd2476 100%)
             document.body.style.color="black"
             setAlert("dark mode Enabled")
             // console.log("light")
@@ -49,12 +40,9 @@ function App() {
         }
          if(mode==="light")
         {
-          setMode("dark")
-          document.body.style.backgroundColor="rgb(57, 58, 59)";
-          // document.body.style.backgroundImage = `url(${bg})`;
-          // document.body.style.backgroundSize="cover"
-          // document.body.style.backgroundRepeat="no-repeat"
-          // document.body.style.height="1000px"
+          setMode("dark")//linear-gradient(to right, #0000ff, #add8e6)
+          document.body.style.backgroundImage = "none";
+          document.body.style.backgroundColor="rgb(48, 51, 51)";//black
           document.body.style.color="white"
           setAlert("Light mode Enabled")
           // console.log("dark")
@@ -62,13 +50,13 @@ function App() {
         }
     }
 
-    ///////
     var alertPlaceholder = document.getElementById('liveAlertPlaceholder')
     
     function alertfunc() {
       var wrapper = document.createElement('div')
-      wrapper.innerHTML = '<div class="alert alert-warning alert-dismissible" role="alert">' + aalert + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+      wrapper.innerHTML = '<br/><div class="alert alert-warning alert-dismissible" role="alert">' + aalert + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
       alertPlaceholder.appendChild(wrapper)
+      clc()
     }
 
   function timeBasedFood(date) {
@@ -82,11 +70,12 @@ function App() {
   }
 
   //to clear alert box every 6 seconds
-  
+  function clc(){
   setTimeout(() => {
     // clearBox()
     document.getElementById('liveAlertPlaceholder').innerHTML = "";
-  }, 8000);
+  }, 5000);
+} 
 
   return (
     <>
@@ -94,6 +83,8 @@ function App() {
     <Router>
       <hr style={{width:"10px"}}/>
     <NavBar mode={mode} togglemode={togglemode} alert={alertfunc}/>
+    <div className='mt-5 container ' id="liveAlertPlaceholder"></div>
+    {/* <br/> */}
         <Routes>
             <Route exact path="/" element={<Area value={timeBasedFood(new Date)} field="type" pagename="home" mode={mode}/> }/>
             <Route exact path="Breakfast" element={<Area value="Breakfast" field="type" mode={mode}/>}/>
@@ -105,15 +96,14 @@ function App() {
 
             <Route exact path="htol" element={<Area value="htol" field="popularity" mode={mode}/>}/>
             <Route exact path="ltoh" element={<Area value="ltoh" field="popularity" mode={mode}/>}/>
+            <Route exact path="/contact" element={<ContactUs uid={Userid } mode={mode}/>}/>
             
             <Route exact path="ItemPage" element={<ItemPage value="ltoh" field="popularity" mode={mode}/>}/>
 
-            {/* <Route exact path="/ItemPage" element={<ItemPage/>}/> */}
             
             <Route exact path="/login" element={<Login mode={mode}/>}/>
             <Route exact path="/SignUp" element={<SignUp mode={mode}/>}/>
             <Route exact path="/Profile" element={<Profile uid={Userid } mode={mode}/>}/>
-            <Route exact path="/contact" element={<ContactUs uid={Userid } mode={mode}/>}/>
         </Routes>
       </Router>
       </div>

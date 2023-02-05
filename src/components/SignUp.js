@@ -4,8 +4,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import {doc, setDoc} from "firebase/firestore"; 
 import {db} from '../firebase'
 import "../css/placeholder1.css"
-// //context create
-// export const UserContext = React.createContext();
+
 export var UserId="";
 export default function SignUp(props) {
   console.clear();
@@ -19,8 +18,6 @@ export default function SignUp(props) {
       fname:FName,
       lname:LName
     };
-    // var id=user.uid.toString()
-    // var col="users"
     async function insertData(user_id){
       await setDoc(doc(db, "users",user_id), docData);
       console.log("data inserted in db");
@@ -69,7 +66,6 @@ export default function SignUp(props) {
       }
   return (
     <div>
-      <br/>
       <br/>
 
       <div className="container">

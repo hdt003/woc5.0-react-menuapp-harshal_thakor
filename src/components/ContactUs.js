@@ -1,6 +1,5 @@
 import { doc, setDoc } from 'firebase/firestore';
-import React, { Component, useEffect, useId, useState } from 'react'
-import { auth } from '../firebase';
+import React, {  useEffect ,useState } from 'react'
 import {db} from '../firebase'
 import "../css/placeholder1.css"
 export default function ContactUs(props) {
@@ -47,8 +46,8 @@ export default function ContactUs(props) {
         check();
     }
   return (
-    <div className='container'>          
-            <br /><br />
+    <div className='container'>    
+    <br />      
             <form className="row g-3 ">
                 <h3 className='text-center' style={{color:`${props.mode==="light"?"black":"white"}`}}>Contact Us</h3>
             <div className="col-12">
@@ -68,6 +67,3 @@ export default function ContactUs(props) {
 
   )
 }
-
-
-// 
