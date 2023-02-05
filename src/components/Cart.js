@@ -40,7 +40,7 @@ export default function Cart(props) {
       {auth.currentUser && userId?<div >
               {array.length?<div><div className="text-center">
                 <div className='row'>
-                <div className='fs-1 fw-bold col-6'>Your Cart</div>
+                <div className='fs-1 fw-bold col-6'>My Cart</div>
                 <div className='fs-1 fw-bold col-6'>Total Items: {ct}</div></div>
                 <br />
                 <button className="btn btn-danger fw-bold btn-lg">Order & Pay</button>

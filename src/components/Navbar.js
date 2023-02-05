@@ -78,7 +78,7 @@ export default function NavBar(props) {
         </div>
         <div className="nav-link-wrapper hover-underline-animation"><Link style={{color: `${props.mode==="light"?"black":"white"}`, "textDecoration": "none"}} to="/contact">Contact Us</Link></div>
 
-        <div className="nav-link-wrapper hover-underline-animation"><Link style={{color: `${props.mode==="light"?"black":"white"}`, "textDecoration": "none"}} to="/cart">Your Cart</Link></div>
+        <div className="nav-link-wrapper hover-underline-animation"><Link style={{color: `${props.mode==="light"?"black":"white"}`, "textDecoration": "none"}} to="/cart">My Cart</Link></div>
 
         
         <div className="nav-link-wrapper hover-underline-animation px-3 pt-3">
