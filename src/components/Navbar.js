@@ -77,6 +77,10 @@ export default function NavBar(props) {
           </ul>
         </div>
         <div className="nav-link-wrapper hover-underline-animation"><Link style={{color: `${props.mode==="light"?"black":"white"}`, "textDecoration": "none"}} to="/contact">Contact Us</Link></div>
+
+        <div className="nav-link-wrapper hover-underline-animation"><Link style={{color: `${props.mode==="light"?"black":"white"}`, "textDecoration": "none"}} to="/cart">Your Cart</Link></div>
+
+        
         <div className="nav-link-wrapper hover-underline-animation px-3 pt-3">
           <div className="d-flex justify-content-around">
         <p  style={{color: `${props.mode==="light"?"black":"white"}`}}>Switch Mode </p>
@@ -87,7 +91,8 @@ export default function NavBar(props) {
         </label>
         </div>
         </div>
-        
+
+
          
         </div>
       </div>

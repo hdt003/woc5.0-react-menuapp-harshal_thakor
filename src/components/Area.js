@@ -106,10 +106,6 @@ setTimeout(temp, 0);
       console.log(props.value)
       ranonce = true
   }
-  console.log(" ")
-  console.log(" ")
-
-  console.log(" ")
 
   },[])
 
@@ -146,7 +142,6 @@ setTimeout(temp, 0);
   function titleText(){
     if(props.value==="htol")
     {
-      // forceUpdate();
       return "by Popularity High to Low"
     }
     else if(props.value==="ltoh")
@@ -185,7 +180,8 @@ setTimeout(temp, 0);
                           review={element.review}
                           func={pull_data}
                           address={element.address}
-                          mode={props.mode}/>
+                          mode={props.mode}
+                          uid={props.uid}/>
                       </div>
                       })
                     }
@@ -214,27 +210,10 @@ setTimeout(temp, 0);
                           name={obj2.name}
                           address={obj2.address}
                           mode={props.mode}
+                          uid={props.uid}
                            />}
         </div>
     </div>
   )
 }
 
-
-
-// img={element.img?element.img:"image"} 
-// description={element.description?element.description:"description"}
-// food_type={element.food_type?element.food_type:"image"}
-// price={element.price?element.price:"0"}
-// popularity= {element.popularity?element.popularity:"0"}
-// type={element.type?element.type:"Veg"}
-// video={element.video?element.video:"video not found"} 
-// name={element.name?element.name:"name"}
-// />
-
-// {this.state.articles.map((element,index)=>{
-//   return <div className=" col-sm-12 col-md-6 col-lg-4" key={element.url}>
-//   <NewsItem title={element.title?element.title:""} description={element.description?element.description:""} imgurl={element.urlToImage?element.urlToImage:"https://cdn.24.co.za/files/Cms/General/d/3366/16f321d743624bb5bfcda90a10fbfc2c.jpg"} newsurl={element.url?element.url:""} author={element.author} newdate={element.publishedAt} sourcename={element.source.name}/>
-//   <span style={element.myStyle} key={index} ></span>;
-//   </div>
-// })}

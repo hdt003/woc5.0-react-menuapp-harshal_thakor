@@ -17,7 +17,7 @@ export default function ContactUs(props) {
 
     const insertData=(async()=>{
         await setDoc(doc(db, "contactus",userId), obj);
-        console.log(obj);
+        // console.log(obj);
         console.log("data inserted in db");
         document.getElementById("new").innerHTML="Submitted"
         })

@@ -8,6 +8,7 @@ import { auth } from './firebase';
 import { useEffect,useState } from 'react';
 import ItemPage from './components/ItemPage';
 import ContactUs from './components/ContactUs';
+import Cart from './components/Cart';
 function App() {
   const [Userid,setUserid]=useState("")
   const [mode,setMode]=useState("light");
@@ -86,19 +87,20 @@ function App() {
     <div className='mt-5 container ' id="liveAlertPlaceholder"></div>
     {/* <br/> */}
         <Routes>
-            <Route exact path="/" element={<Area value={timeBasedFood(new Date)} field="type" pagename="home" mode={mode}/> }/>
-            <Route exact path="Breakfast" element={<Area value="Breakfast" field="type" mode={mode}/>}/>
-            <Route exact path="Lunch" element={<Area value="Lunch" field="type" mode={mode}/>}/>
-            <Route exact path="Dinner" element={<Area value="Dinner" field="type" mode={mode}/>}/>
+            <Route exact path="/" element={<Area uid={Userid } value={timeBasedFood(new Date)} field="type" pagename="home" mode={mode}/> }/>
+            <Route exact path="Breakfast" element={<Area uid={Userid } value="Breakfast" field="type" mode={mode}/>}/>
+            <Route exact path="Lunch" element={<Area uid={Userid } value="Lunch" field="type" mode={mode}/>}/>
+            <Route exact path="Dinner" element={<Area uid={Userid } value="Dinner" field="type" mode={mode}/>}/>
 
-            <Route exact path="Veg" element={<Area value="Veg" field="food_type" mode={mode}/>}/>
-            <Route exact path="Non_Veg" element={<Area value="Non-Veg" field="food_type" mode={mode}/>}/>
+            <Route exact path="Veg" element={<Area uid={Userid } value="Veg" field="food_type" mode={mode}/>}/>
+            <Route exact path="Non_Veg" element={<Area uid={Userid } value="Non-Veg" field="food_type" mode={mode}/>}/>
 
-            <Route exact path="htol" element={<Area value="htol" field="popularity" mode={mode}/>}/>
-            <Route exact path="ltoh" element={<Area value="ltoh" field="popularity" mode={mode}/>}/>
+            <Route exact path="htol" element={<Area uid={Userid } value="htol" field="popularity" mode={mode}/>}/>
+            <Route exact path="ltoh" element={<Area uid={Userid } value="ltoh" field="popularity" mode={mode}/>}/>
             <Route exact path="/contact" element={<ContactUs uid={Userid } mode={mode}/>}/>
+            <Route exact path="cart" element={<Cart uid={Userid } mode={mode}/>}/>
             
-            <Route exact path="ItemPage" element={<ItemPage value="ltoh" field="popularity" mode={mode}/>}/>
+            <Route exact path="ItemPage" element={<ItemPage uid={Userid } value="ltoh" field="popularity" mode={mode}/>}/>
 
             
             <Route exact path="/login" element={<Login mode={mode}/>}/>
