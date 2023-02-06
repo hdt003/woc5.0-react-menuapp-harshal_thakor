@@ -4,10 +4,12 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import {doc, setDoc} from "firebase/firestore"; 
 import {db} from '../firebase'
 import "../css/placeholder1.css"
-
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 export var UserId="";
 export default function SignUp(props) {
   console.clear();
+  const navigate = useNavigate();
     const [Email,setEmail]=useState("")
     const [Password,setPassword]=useState("")
     const [FName,setFName]=useState("")
@@ -22,6 +24,10 @@ export default function SignUp(props) {
       await setDoc(doc(db, "users",user_id), docData);
       console.log("data inserted in db");
     }
+    function getsubstring(err)
+    {
+      return err.substring(5,err.length)
+    }
     const handleSignUp=()=>{
       createUserWithEmailAndPassword(auth,Email,Password)
           .then((userCredential)=>{
@@ -33,7 +39,10 @@ export default function SignUp(props) {
           })
           .catch((error) => {
             const errorCode = error.code;
-            alert(errorCode);
+            document.getElementById('liveAlertPlaceholder').innerHTML = `<br/><div class="alert alert-success alert-dismissible text-dark text-center border-2 border-dark" role="alert">${getsubstring(errorCode)}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+        setTimeout(() => {
+          document.getElementById('liveAlertPlaceholder').innerHTML = "";
+        }, 5000);
           });
     }
 
@@ -57,7 +66,7 @@ export default function SignUp(props) {
     }
     const pass=()=>{
       if(auth.currentUser){
-      window.location.replace("/");
+        navigate("/");;
     }
     } 
     function todo(){
@@ -91,7 +100,7 @@ export default function SignUp(props) {
         <button className="btn btn-primary" onClick={todo}>SignUp</button>
         </div>
         <div>
-        <div>Already have an account? <a href="/login">Login</a></div>
+        <div>Already have an account? <Link to="/login">Login</Link></div>
       </div>
       </div>
     </div>

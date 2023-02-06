@@ -86,6 +86,28 @@ setTimeout(temp, 0);
       });
       }
     }
+    else if(`${props.field}`==="price")
+    {
+      if(`${props.value}`==="price_htol")
+      {
+        q = query(collectionGroup(db, "items"), orderBy("price","desc"));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data().name,doc.data().popularity,doc.data().description);
+        setArray(array => [...array, doc.data()]);
+      });
+        
+      }
+      else if(`${props.value}`==="price_ltoh")
+      {
+        q = query(collectionGroup(db,"items"), orderBy("price","asc"));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data().name,doc.data().popularity,doc.data().description);
+        setArray(array => [...array, doc.data()]);
+      });
+      }
+    }
     else
     {
         q = query(collectionGroup(db,"items"), where(`${props.field}`, "==", `${props.value}`));  
@@ -147,6 +169,14 @@ setTimeout(temp, 0);
     else if(props.value==="ltoh")
     {
       return "by Popularity Low to High"
+    }
+    else if(props.value==="price_htol")
+    {
+      return "by Price High to Low"
+    }
+    else if(props.value==="price_ltoh")
+    {
+      return "by Price Low to High"
     }
     else if(props.pagename==="home")
     {

@@ -49,7 +49,8 @@ export default function NavBar(props) {
                   <li>
                     <Link style={{background:`${props.mode==="light"?"white":""}`,color: `${props.mode==="light"?"black":"white"}`, "textDecoration": "none"}} className="dropdown-item hover-underline-animation fw-bold" to="/Dinner">Dinner</Link>
                   </li>
-                </ul></li>
+                </ul>
+              </li>
             <li>
               <Link style={{background:`${props.mode==="light"?"white":""}`,color: `${props.mode==="light"?"black":"white"}`, "textDecoration": "none"}} className="dropdown-item hover-underline-animation fw-bold" to="/#">Food Type &raquo;</Link>
               <ul className="dropdown-menu dropdown-submenu fw-bold" style={{background:`${props.mode==="light"?"white":""}`,color: `${props.mode==="light"?"black":"white"}`, "textDecoration": "none"}}>
@@ -71,6 +72,17 @@ export default function NavBar(props) {
                 </li>
                 <li>
                   <Link style={{background:`${props.mode==="light"?"white":""}`,color: `${props.mode==="light"?"black":"white"}`, "textDecoration": "none"}} className="dropdown-item hover-underline-animation fw-bold" to="/ltoh">Lowest to Highest</Link>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <Link style={{background:`${props.mode==="light"?"white":""}`,color: `${props.mode==="light"?"black":"white"}`, "textDecoration": "none"}} className="dropdown-item hover-underline-animation fw-bold" to="/#">Price &raquo;</Link>
+              <ul className="dropdown-menu dropdown-submenu fw-bold" style={{background:`${props.mode==="light"?"white":""}`,color: `${props.mode==="light"?"black":"white"}`, "textDecoration": "none"}}>
+                <li>
+                  <Link style={{background:`${props.mode==="light"?"white":""}`,color: `${props.mode==="light"?"black":"white"}`, "textDecoration": "none"}} className="dropdown-item hover-underline-animation fw-bold" to="/price_htol">Higest to Lowest</Link>
+                </li>
+                <li>
+                  <Link style={{background:`${props.mode==="light"?"white":""}`,color: `${props.mode==="light"?"black":"white"}`, "textDecoration": "none"}} className="dropdown-item hover-underline-animation fw-bold" to="/price_ltoh">Lowest to Highest</Link>
                 </li>
               </ul>
             </li>

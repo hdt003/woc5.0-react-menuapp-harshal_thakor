@@ -2,10 +2,18 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import React,{useState} from 'react'
 import {auth} from '../firebase'
 import "../css/placeholder1.css"
+import { useNavigate,Link } from 'react-router-dom';
 export default function Login(props) {
     console.clear();
+    const navigate = useNavigate();
     const [Email,setEmail]=useState("")
     const [Password,setPassword]=useState("")
+
+    function getsubstring(err)
+    {
+      return err.substring(5,err.length)
+    }
+
     const handleLogin=()=>{
       signInWithEmailAndPassword(auth, Email, Password)
       .then((userCredential) => {
@@ -13,12 +21,16 @@ export default function Login(props) {
         const user = userCredential.user;
         // console.log(user.uid)
         // alert("Successfully Logged In")
-        window.location.replace("/");
+        navigate("/")
       })
       .catch((error) => {
         const errorCode = error.code;
         // const errorMessage = error.message;
-        alert(errorCode)
+        document.getElementById('liveAlertPlaceholder').innerHTML = `<br/><div class="alert alert-success alert-dismissible text-dark text-center border-2 border-dark" role="alert">${getsubstring(errorCode)}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+        setTimeout(() => {
+          document.getElementById('liveAlertPlaceholder').innerHTML = "";
+        }, 5000);
+        // alert(errorCode)
       });
     }
     const check=()=>{
@@ -58,7 +70,7 @@ export default function Login(props) {
         <button type="submit" className="btn btn-primary" id="myBtn"  onClick={check} tabIndex={0}>Login</button>
 
         </div >
-        <div>Don't have an account? <a href="/SignUp">SignUp</a></div>
+        <div>Don't have an account? <Link to="/SignUp">SignUp</Link></div>
       </div>
     </div>
   )

@@ -17,7 +17,7 @@ function App() {
   useEffect(()=>{ 
 
     auth.onAuthStateChanged((user)=>{
-      console.log("user:",user)
+      // console.log("user:",user)
       if(user){
         setUserid(user.uid)
       }
@@ -55,7 +55,7 @@ function App() {
     
     function alertfunc() {
       var wrapper = document.createElement('div')
-      wrapper.innerHTML = '<br/><div class="alert alert-warning alert-dismissible" role="alert">' + aalert + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+      wrapper.innerHTML = '<br/><div class="alert alert-success alert-dismissible text-dark text-center border-2 border-dark" role="alert">' + aalert + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
       alertPlaceholder.appendChild(wrapper)
       clc()
     }
@@ -97,12 +97,14 @@ function App() {
 
             <Route exact path="htol" element={<Area uid={Userid } value="htol" field="popularity" mode={mode}/>}/>
             <Route exact path="ltoh" element={<Area uid={Userid } value="ltoh" field="popularity" mode={mode}/>}/>
+            
+            <Route exact path="/price_ltoh" element={<Area uid={Userid } value="price_ltoh" field="price" mode={mode}/>}/>
+            <Route exact path="/price_htol" element={<Area uid={Userid } value="price_htol" field="price" mode={mode}/>}/>
+            
             <Route exact path="/contact" element={<ContactUs uid={Userid } mode={mode}/>}/>
             <Route exact path="cart" element={<Cart uid={Userid } mode={mode}/>}/>
             
-            <Route exact path="ItemPage" element={<ItemPage uid={Userid } value="ltoh" field="popularity" mode={mode}/>}/>
-
-            
+       
             <Route exact path="/login" element={<Login mode={mode}/>}/>
             <Route exact path="/SignUp" element={<SignUp mode={mode}/>}/>
             <Route exact path="/Profile" element={<Profile uid={Userid } mode={mode}/>}/>

@@ -4,11 +4,13 @@ import vegg from "../images/veg.png"
 import nonvegg from "../images/nonveg.png"
 import { doc, setDoc } from 'firebase/firestore'
 import { db } from '../firebase'
+import { useNavigate } from 'react-router-dom'
 
 export default function ItemPage(props) {
-  var check=false
+  const navigate = useNavigate();
   const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let [p,setp]=useState({})
+  let [str,setStr]=useState(generateString(15))
   useEffect(()=>{
     setp({
     img:props.img ,
@@ -21,8 +23,10 @@ export default function ItemPage(props) {
     video:props.video ,
     name:props.name,
     address:props.address,
-    uid:props.uid
+    uid:props.uid,
+    oid:str
   })
+  console.log(props.price)
 },[])
   function content()
   {
@@ -46,7 +50,7 @@ export default function ItemPage(props) {
   }
   // if(check){
     function generateString(length) {
-      let result = ' ';
+      let result = '';
       const charactersLength = characters.length;
       for ( let i = 0; i < length; i++ ) {
           result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -58,12 +62,20 @@ export default function ItemPage(props) {
   {
     if(props.uid!=="")
     {
-    await setDoc(doc(db, "cart",p.uid,"orders",generateString(15)), p);
+    await setDoc(doc(db, "cart",p.uid,"orders",str), p);
     // console.log(p);
     console.log("data inserted in db");
+    document.getElementById('liveAlertPlaceholder').innerHTML = `<br/><div class="alert alert-success alert-dismissible text-dark text-center border-2 border-dark" role="alert">Added In My Cart Succesfully<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+    setTimeout(() => {
+      document.getElementById('liveAlertPlaceholder').innerHTML = "";
+    }, 5000);
     }
     else{
-      console.log("Please Login");
+      navigate("/login");
+      document.getElementById('liveAlertPlaceholder').innerHTML = `<br/><div class="alert alert-success alert-dismissible text-dark text-center border-2 border-dark" role="alert">Login To Add Items Into Cart<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+      setTimeout(() => {
+        document.getElementById('liveAlertPlaceholder').innerHTML = "";
+      }, 5000);
     }
   }
   
@@ -74,7 +86,6 @@ return (
             <br/>
             
       <div className="row">
-      {/* d-flex justify-content-evenly */}
         <div className="col-6 column6">
           <div> 
           <img className="position-fixed p-3"src={props.food_type==="Veg"?vegg:nonvegg}  alt="..." width="6%" height="14%"  />
