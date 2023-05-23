@@ -15,7 +15,7 @@ function App() {
   const [aalert,setAlert]=useState("Light Mode Enabled")
 
   useEffect(()=>{ 
-
+    
     auth.onAuthStateChanged((user)=>{
       // console.log("user:",user)
       if(user){
